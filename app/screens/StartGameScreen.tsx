@@ -2,6 +2,9 @@ import PrimaryButton from "@/app/ui/PrimaryButton";
 import React, { useState } from "react";
 import { Alert, StyleSheet, TextInput, View } from "react-native";
 import Colors from "../constants/Colors";
+import Title from "@/app/ui/Title";
+import Card from "@/app/ui/Card";
+import IntroductionText from "@/app/ui/IntroductionText";
 
 const StartGameScreen = ({
   onPickNumber,
@@ -29,24 +32,28 @@ const StartGameScreen = ({
   }
 
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.numberInput}
-        maxLength={2}
-        keyboardType="number-pad"
-        autoCapitalize="none"
-        autoCorrect={false}
-        value={enteredNumber}
-        onChangeText={numberInputHandler}
-      />
-      <View style={styles.buttonsContainer}>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+    <View style={styles.rootScreen}>
+      <Title>Guess My Number</Title>
+      <Card>
+        <IntroductionText style={styles.instructionText}>Enter a number</IntroductionText>
+        <TextInput
+          style={styles.numberInput}
+          maxLength={2}
+          keyboardType="number-pad"
+          autoCapitalize="none"
+          autoCorrect={false}
+          value={enteredNumber}
+          onChangeText={numberInputHandler}
+        />
+        <View style={styles.buttonsContainer}>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
+          </View>
+          <View style={styles.buttonContainer}>
+            <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
+          </View>
         </View>
-        <View style={styles.buttonContainer}>
-          <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
-        </View>
-      </View>
+      </Card>
     </View>
   );
 };
@@ -54,19 +61,10 @@ const StartGameScreen = ({
 export default StartGameScreen;
 
 const styles = StyleSheet.create({
-  inputContainer: {
-    justifyContent: "center",
+  rootScreen: {
+    flex: 1,
     alignItems: "center",
     marginTop: 100,
-    padding: 16,
-    marginHorizontal: 24,
-    backgroundColor: Colors.primary800,
-    borderRadius: 8,
-    elevation: 4, // for android specific
-    shadowColor: "#000", // for ios specific
-    shadowOffset: { width: 0, height: 2 }, // for ios specific
-    shadowOpacity: 0.25, // for ios specific
-    shadowRadius: 3.84, // for ios specific
   },
   numberInput: {
     height: 50,
@@ -84,5 +82,8 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
+  },
+  instructionText: {
+    marginBottom: 12,
   },
 });
