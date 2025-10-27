@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     alignItems: "center",
     justifyContent: "center",
+    marginTop: 24,
   },
   numberText: {
     color: Colors.accent500,
