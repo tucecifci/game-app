@@ -5,7 +5,7 @@ import { Alert, StyleSheet, View } from "react-native";
 import NumberContainer from "../game/NumberContainer";
 import Card from "@/app/ui/Card";
 import IntroductionText from "@/app/ui/IntroductionText";
-import Colors from "../constants/Colors";
+import { Ionicons } from "@expo/vector-icons";
 
 function generateRandomBetween(min: number, max: number, exclude: number) {
   const rndNum = Math.floor(Math.random() * (max - min) + min);
@@ -72,12 +72,12 @@ const GameScreen = ({
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={() => nextGuessHandler("higher")}>
-              +
+              <Ionicons name="add-circle-outline" size={24} color="white" />
             </PrimaryButton>
           </View>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={() => nextGuessHandler("lower")}>
-              -
+              <Ionicons name="remove-circle-outline" size={24} color="white" />
             </PrimaryButton>
           </View>
         </View>
