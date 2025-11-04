@@ -39,6 +39,11 @@ const GameScreen = ({
     }
   }, [currentGuess, onGameOver, userNumber]);
 
+  useEffect(() => {
+    minBoundary = 1;
+    maxBoundary = 100;
+  }, []);
+
   function nextGuessHandler(direction: "higher" | "lower") {
     if (
       (direction === "lower" && currentGuess < userNumber) ||
@@ -68,7 +73,9 @@ const GameScreen = ({
       <Title>Opponent&apos;s Guess</Title>
       <NumberContainer>{currentGuess}</NumberContainer>
       <Card>
-        <IntroductionText style={styles.instructionText}>Higher or lower?</IntroductionText>
+        <IntroductionText style={styles.instructionText}>
+          Higher or lower?
+        </IntroductionText>
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={() => nextGuessHandler("higher")}>
