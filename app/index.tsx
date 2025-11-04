@@ -12,6 +12,8 @@ import GameScreen from "./screens/GameScreen";
 export default function Home() {
   const [userNumber, setUserNumber] = useState<number | null>(null);
   const [gameIsOver, setGameIsOver] = useState(true);
+  const [roundsNumber, setRoundsNumber] = useState(0);
+
   const [fontsLoaded] = useFonts({
     "open-sans": require("@/assets/fonts/OpenSans-Regular.ttf"),
     "open-sans-bold": require("@/assets/fonts/OpenSans-Bold.ttf"),
@@ -38,6 +40,11 @@ export default function Home() {
     setGameIsOver(true);
   }
 
+  function startNewGameHandler() {
+    setUserNumber(null);
+    setRoundsNumber(0);
+    setGameIsOver(false);
+  }
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
   if (userNumber) {
     screen = (
@@ -45,7 +52,13 @@ export default function Home() {
     );
   }
   if (gameIsOver && userNumber) {
-    screen = <GameOverScreen />;
+    screen = (
+      <GameOverScreen
+        roundsNumber={roundsNumber}
+        userNumber={userNumber}
+        onStartNewGame={startNewGameHandler}
+      />
+    );
   }
 
   return (
