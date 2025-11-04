@@ -23,6 +23,7 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   numberText: {
+    fontFamily: "open-sans-bold",
     color: Colors.accent500,
     fontSize: 36,
     fontWeight: "bold",
