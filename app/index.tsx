@@ -1,15 +1,34 @@
 import StartGameScreen from "@/app/screens/StartGameScreen";
-import { StyleSheet, ImageBackground } from "react-native";
+import { useFonts } from "expo-font";
 import { LinearGradient } from "expo-linear-gradient";
-import GameScreen from "./screens/GameScreen";
-import { useState } from "react";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect, useState } from "react";
+import { ImageBackground, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "./constants/Colors";
 import GameOverScreen from "./screens/GameOverScreen";
+import GameScreen from "./screens/GameScreen";
 
 export default function Home() {
   const [userNumber, setUserNumber] = useState<number | null>(null);
   const [gameIsOver, setGameIsOver] = useState(true);
+  const [fontsLoaded] = useFonts({
+    "open-sans": require("@/assets/fonts/OpenSans-Regular.ttf"),
+    "open-sans-bold": require("@/assets/fonts/OpenSans-Bold.ttf"),
+  });
+  useEffect(() => {
+    SplashScreen.preventAutoHideAsync();
+  }, []);
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   function pickedNumberHandler(pickedNumber: number) {
     setUserNumber(pickedNumber);
@@ -18,7 +37,7 @@ export default function Home() {
   function gameOverHandler() {
     setGameIsOver(true);
   }
-  
+
   let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
   if (userNumber) {
     screen = (
