@@ -36,8 +36,9 @@ export default function Home() {
     setUserNumber(pickedNumber);
     setGameIsOver(false);
   }
-  function gameOverHandler() {
+  function gameOverHandler(numberOfRounds: number) {
     setGameIsOver(true);
+    setRoundsNumber(numberOfRounds);
   }
 
   function startNewGameHandler() {
