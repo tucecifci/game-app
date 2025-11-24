@@ -8,6 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Colors from "./constants/Colors";
 import GameOverScreen from "./screens/GameOverScreen";
 import GameScreen from "./screens/GameScreen";
+import { StatusBar } from "expo-status-bar";
 
 export default function Home() {
   const [userNumber, setUserNumber] = useState<number | null>(null);
@@ -63,6 +64,8 @@ export default function Home() {
   }
 
   return (
+    <>
+    <StatusBar style="auto" />
     <LinearGradient
       colors={[Colors.primary700, Colors.accent500]}
       style={styles.rootContainer}
@@ -76,8 +79,10 @@ export default function Home() {
         <SafeAreaView style={styles.rootContainer}>{screen}</SafeAreaView>
       </ImageBackground>
     </LinearGradient>
+    </>
   );
 }
+
 
 const styles = StyleSheet.create({
   rootContainer: {
